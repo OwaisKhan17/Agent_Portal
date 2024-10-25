@@ -2,6 +2,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import InputField from "./inputField/InputField";
+import CustomButton from "./button/Button";
 import CopyRight from "./copyRight/CopyRight";
 
 export default function LoginComponent({ toggleForm }) {
@@ -39,28 +40,25 @@ export default function LoginComponent({ toggleForm }) {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="space-y-6">
-            <div className="">
-            <InputField
-                labelClasses="text-base text-black font-normal"
-                labelText="Enter your username or email address"
-                fieldClasses="w-full text-sm mt-2 px-4 py-4 border border-[#8E8E8E] rounded-md bg-transparentt"
-                fieldType="text"
-                fieldValue={username}
-                fieldPlaceholder="Username or email address"
-                onChange={(e) => setUsername(e.target.value)}
-              />              
-            </div>
             <div className="relative mt-4">
               <InputField
-                labelClasses="text-base text-black font-normal"
-                labelText="Enter your Password"
-                fieldClasses="w-full text-sm mt-2 px-4 py-4 border border-[#8E8E8E] rounded-md bg-transparent"
-                fieldType="password"
-                fieldValue={password}
-                fieldPlaceholder="Password"
+                labelPlacement="outside"
+                label="Enter your username or email address"
+                type="email"
+                value={username}
+                placeholder="Username or email address"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+
+              <InputField
+                labelPlacement="outside"
+                label="Enter your Password"
+                type="password"
+                value={password}
+                placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               />
- 
+
               <div className="flex items-center right-[20px] top-[50px] absolute text-sm leading-5">
                 <svg
                   className="h-4 text-[#8E8E8E] block size-5"
@@ -71,8 +69,8 @@ export default function LoginComponent({ toggleForm }) {
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
                   />
                   <path
@@ -93,23 +91,37 @@ export default function LoginComponent({ toggleForm }) {
               </div>
             </div>
             <div>
-              <button
+              {/* <button
                 type="submit"
                 className="bg-[#159D97] text-white font-medium text-base w-full flex justify-center p-x py-4 rounded-lg 
-                font-semibold shadow-[0_4px_19px_0_rgba(119, 147, 65, 0.3)] cursor-pointer" >
+                font-semibold shadow-[0_4px_19px_0_rgba(119, 147, 65, 0.3)] cursor-pointer"
+              >
                 Login
-              </button>
+              </button> */}
+              <CustomButton
+                buttonText={"Login"}
+                className="bg-[#159D97] text-white font-medium text-base w-full flex justify-center p-x py-4 rounded-lg 
+                font-semibold shadow-[0_4px_19px_0_rgba(119, 147, 65, 0.3)] cursor-pointer"
+              />
             </div>
             <div>
-            <p className="text-[#8D8D8D] text-center text-base font-normal mt-4">You dont have an Account?
-              <Link href="#" onClick={toggleForm} className="underline text-[#1B9993]"> Sign up</Link>
+              <p className="text-[#8D8D8D] text-center text-base font-normal mt-4">
+                You dont have an Account?
+                <Link
+                  href="#"
+                  onClick={toggleForm}
+                  className="underline text-[#1B9993]"
+                >
+                  {" "}
+                  Sign up
+                </Link>
               </p>
             </div>
           </div>
           <p className="text-red-500 mt-2">{message}</p>
         </form>
       </div>
-      
+
       <CopyRight />
     </div>
   );
