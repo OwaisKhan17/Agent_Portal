@@ -5,6 +5,7 @@ import { hasAccess } from 'utils/auth';
 import Link from 'next/link';
 import LanguageSelector from "./LanguageSelector";
 import { authOptions } from "app/[lang]/api/auth/[...nextauth]/route";
+import Logout from "./Logout";
 
 const TopBarNav = async () => {
 
@@ -39,6 +40,7 @@ const TopBarNav = async () => {
                         </li>
                     )}
 
+                    <Logout />
                     <LanguageSelector />
 
                 </ul>

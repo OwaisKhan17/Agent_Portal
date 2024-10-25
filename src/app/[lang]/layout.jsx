@@ -1,11 +1,12 @@
-import {Poppins} from "next/font/google"
+import { Poppins } from "next/font/google";
 import "./globals.css";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { NextUIProvider } from "@nextui-org/react";
 
-const poppins = Poppins({ 
-  subsets: ['latin'],
-  weight: ['400','500','600','700','800','900']
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata = {
@@ -16,16 +17,15 @@ export const metadata = {
 export default async function RootLayout({ children, params }) {
   const { lang } = params;
   const messages = await getMessages();
-console.log('i am layout')
+  console.log("i am layout");
   return (
     <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
- 
-      <body
-        className={`${poppins.className} antialiased`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+      <body className={`${poppins.className} antialiased`}>
+        <NextUIProvider>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </NextUIProvider>
       </body>
     </html>
   );
