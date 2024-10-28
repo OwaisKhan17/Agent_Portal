@@ -4,11 +4,16 @@ import { useState } from "react";
 import InputField from "./inputField/InputField";
 import CustomButton from "./button/Button";
 import CopyRight from "./copyRight/CopyRight";
+import { EyeSlashFilledIcon, EyeSlashUnfilledIcon } from "./svgIcons/icons";
 
 export default function LoginComponent({ toggleForm }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,33 +58,25 @@ export default function LoginComponent({ toggleForm }) {
               <InputField
                 labelPlacement="outside"
                 label="Enter your Password"
-                type="password"
+                type={isVisible ? "text" : "password"}
                 value={password}
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                endContent={
+                  <button
+                    className="focus:outline-none"
+                    type="button"
+                    onClick={toggleVisibility}
+                    aria-label="toggle password visibility"
+                  >
+                    {isVisible ? (
+                      <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    ) : (
+                      <EyeSlashUnfilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    )}
+                  </button>
+                }
               />
-
-              <div className="flex items-center right-[20px] top-[50px] absolute text-sm leading-5">
-                <svg
-                  className="h-4 text-[#8E8E8E] block size-5"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  />
-                </svg>
-              </div>
 
               <div className="flex justify-between items-center mt-1">
                 <Link href="#" className="text-sm font-normal text-[#1B9E97]">
