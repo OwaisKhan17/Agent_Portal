@@ -13,6 +13,7 @@ const InputField = ({
   isDisabled,
   // className,
   onChange,
+  endContent,
 }) => {
   return (
     <>
@@ -26,6 +27,7 @@ const InputField = ({
         defaultValue={defaultValue}
         isRequired={isRequired}
         isDisabled={isDisabled}
+        endContent={endContent}
         classNames={{
           label: "text-base text-black font-normal",
           inputWrapper:
