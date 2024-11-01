@@ -2,7 +2,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "app/[lang]/api/auth/[...nextauth]/route";
 import MainLayout from "../layout/page";
 
-
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
 
@@ -13,6 +12,8 @@ const Dashboard = async () => {
       </div>
     );
   }
+
+  console.log("sessionsessionsessionsession", session);
 
   return (
     <MainLayout>

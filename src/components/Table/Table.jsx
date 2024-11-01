@@ -12,7 +12,13 @@ import {
   User,
   Tooltip,
 } from "@nextui-org/react";
-import { DeleteIcon, EditIcon, ExportIcon, EyeIcon, FilterIcon } from "components/svgIcons/icons";
+import {
+  DeleteIcon,
+  EditIcon,
+  ExportIcon,
+  EyeIcon,
+  FilterIcon,
+} from "components/svgIcons/icons";
 
 const statusColorMap = {
   active: "success",
@@ -41,29 +47,35 @@ const TableComponent = ({ columns, rowsPerPage, apiUrl }) => {
 
   const renderCell = useCallback((item, columnKey) => {
     const cellValue = item[columnKey];
-    console.log('cellValue ',cellValue)
+    console.log("cellValue ", cellValue);
     switch (columnKey) {
       case "firstName":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{item.role}</p>
+            <p className="text-bold text-sm capitalize text-default-400">
+              {item.role}
+            </p>
           </div>
         );
       case "email":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{item.firstName}</p>
+            <p className="text-bold text-sm capitalize text-default-400">
+              {item.firstName}
+            </p>
           </div>
         );
-        case "age":
-          return (
-            <div className="flex flex-col">
-              <p className="text-bold text-sm capitalize">{cellValue}</p>
-              <p className="text-bold text-sm capitalize text-default-400">{item.firstName}</p>
-            </div>
-          );
+      case "age":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm capitalize">{cellValue}</p>
+            <p className="text-bold text-sm capitalize text-default-400">
+              {item.firstName}
+            </p>
+          </div>
+        );
       case "actions":
         return (
           <div className="relative justify-center flex items-center gap-2">
@@ -97,11 +109,11 @@ const TableComponent = ({ columns, rowsPerPage, apiUrl }) => {
     <div>
       {/* Custom styles */}
       <style jsx>{`
-        .custom-pagination{
+        .custom-pagination {
           background-color: #000000;
         }
-        .custom-pagination .item.active{
-          background-color: #19D2BCBF;
+        .custom-pagination .item.active {
+          background-color: #19d2bcbf;
         }
       `}</style>
 
@@ -112,18 +124,25 @@ const TableComponent = ({ columns, rowsPerPage, apiUrl }) => {
           <div className="flex gap-x-5 justify-end mb-9 mt-8">
             <button className="bg-white rounded-xl border-1 border-[#0258643B] shadow-lg shadow-[#8E8E8E45] w-36 py-3 justify-center items-center flex gap-x-4">
               <FilterIcon />
-              <span className="text-[#3E3E3E] font-medium text-base">Filters</span>
+              <span className="text-[#3E3E3E] font-medium text-base">
+                Filters
+              </span>
             </button>
             <button className="bg-white rounded-xl border-1 border-[#0258643B] shadow-lg shadow-[#8E8E8E45] w-36 py-3 justify-center items-center flex gap-x-4">
               <ExportIcon />
-              <span className="text-[#3E3E3E] font-medium text-base">Export</span>
+              <span className="text-[#3E3E3E] font-medium text-base">
+                Export
+              </span>
             </button>
           </div>
 
           <Table aria-label="Data table with actions">
             <TableHeader columns={columns}>
               {(column) => (
-                <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+                <TableColumn
+                  key={column.uid}
+                  align={column.uid === "actions" ? "center" : "start"}
+                >
                   {column.name}
                 </TableColumn>
               )}
@@ -131,7 +150,9 @@ const TableComponent = ({ columns, rowsPerPage, apiUrl }) => {
             <TableBody items={data}>
               {(item) => (
                 <TableRow key={item.id}>
-                  {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+                  {(columnKey) => (
+                    <TableCell>{renderCell(item, columnKey)}</TableCell>
+                  )}
                 </TableRow>
               )}
             </TableBody>

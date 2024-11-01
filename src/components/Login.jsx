@@ -4,30 +4,42 @@ import { useState } from "react";
 import InputField from "./inputField/InputField";
 import CopyRight from "./copyRight/CopyRight";
 import { EyeSlashFilledIcon, EyeSlashUnfilledIcon } from "./svgIcons/icons";
- 
+import Loader from "./loader/Loader";
+import { useDispatch } from "react-redux";
+import { loaderStatus } from "lib/actions/authActions";
+
 export default function LoginComponent({ toggleForm }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
- 
+
   const [isVisible, setIsVisible] = useState(false);
- 
+
+  const dispatch = useDispatch();
+
   const toggleVisibility = () => setIsVisible(!isVisible);
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(loaderStatus(true));
+    setMessage("");
     const result = await signIn("credentials", {
+      accessIdentifier: username,
+      accessKey: password,
+      accessKeyType: "password",
+      portalId: "9",
+      deviceId: "",
+      pushId: "",
       redirect: false,
-      username,
-      password,
     });
- 
+    dispatch(loaderStatus(false));
+    console.log("resultresultresultresult", result);
     if (result.error) {
-      setMessage(result.error);
+      setMessage("Invalid Credentials");
       return false;
     }
   };
- 
+
   return (
     <div className="flex justify-center h-screen items-center w-[calc(100%-400px)] relative z-10">
       <div className="p-12 bg-[#FFFEF9] mx-auto rounded-3xl w-[540px] shadow-[0px_4px_72px_9px_rgba(26,125,126,0.23)]">
@@ -39,8 +51,21 @@ export default function LoginComponent({ toggleForm }) {
             Lets Get Started
           </h2>
         </div>
+        {/* <form onSubmit={handleSubmit}> */}
+
         <div className="space-y-6">
-          <div className="">
+          <div>
+            <InputField
+              labelClasses="text-base text-black font-normal"
+              labelText="Enter company code"
+              fieldClasses="w-full text-sm mt-2 px-4 py-4 border border-[#8E8E8E] rounded-md bg-transparentt"
+              fieldType="text"
+              fieldValue={username}
+              fieldPlaceholder="Company code"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div>
             <InputField
               labelClasses="text-base text-black font-normal"
               labelText="Enter your username or email address"
@@ -61,7 +86,6 @@ export default function LoginComponent({ toggleForm }) {
               fieldPlaceholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
- 
             <button
               className="focus:outline-none flex items-center right-[20px] top-[50px] absolute text-sm leading-5"
               type="button"
@@ -74,7 +98,7 @@ export default function LoginComponent({ toggleForm }) {
                 <EyeSlashUnfilledIcon className="text-2xl text-default-400 pointer-events-none" />
               )}
             </button>
- 
+
             <div className="flex justify-between items-center mt-1">
               {/* <Link href="#" className="text-sm font-normal text-[#1B9E97]">
                 Forgot Username
@@ -110,7 +134,7 @@ export default function LoginComponent({ toggleForm }) {
         </div>
         <p className="text-red-500 mt-2">{message}</p>
       </div>
- 
+
       <CopyRight />
     </div>
   );

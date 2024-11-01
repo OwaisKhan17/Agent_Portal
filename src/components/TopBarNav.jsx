@@ -1,18 +1,17 @@
 // components/Navbar.js
-'use client';
+"use client";
 import { hasAccess } from "utils/auth";
 import Link from "next/link";
 import Image from "next/image";
 import LanguageSelector from "./LanguageSelector";
 import Logout from "./Logout";
-import ProfileImage from "./../../public/images/profile-img.jpg"
+import ProfileImage from "./../../public/images/profile-img.jpg";
 import { NotificationIcon, SearchIcon } from "./svgIcons/icons";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 
-
-const TopBarNav = ({session}) => {
+const TopBarNav = ({ session }) => {
   const pathName = usePathname();
-  const pageName = pathName.split('/').pop() || '';
+  const pageName = pathName.split("/").pop() || "";
 
   return (
     <nav className="bg-white py-4">
@@ -21,22 +20,33 @@ const TopBarNav = ({session}) => {
 
         <div className="flex gap-x-6 items-center">
           <button className="bg-white rounded-full w-11 h-11 shadow-lg shadow-[#8E8E8E45] text-center">
-            <SearchIcon/>
+            <SearchIcon />
           </button>
 
           <button className="bg-white rounded-full w-11 h-11 shadow-lg shadow-[#8E8E8E45] text-center">
-            <NotificationIcon/>
+            <NotificationIcon />
           </button>
 
-          <Link href="#" className="flex px-2.5 py-2.5 gap-4 items-center justify-between shadow-lg shadow-[#8E8E8E45] rounded-2xl">
-            <Image src={ProfileImage} width={"32"} height={"32"} 
-            className="rounded-full w-8	h-8" alt="Profile Image"/>
+          <Link
+            href="#"
+            className="flex px-2.5 py-2.5 gap-4 items-center justify-between shadow-lg shadow-[#8E8E8E45] rounded-2xl"
+          >
+            <Image
+              src={ProfileImage}
+              width={"32"}
+              height={"32"}
+              className="rounded-full w-8	h-8"
+              alt="Profile Image"
+            />
             <div className="flex flex-col">
-                <span className="text-[#8E8E8E] text-base font-medium">{session.userData?.firstName} {session.userData?.lastName}</span>
-                <span className="text-[#133664] text-sm font-normal">View profile</span>
+              <span className="text-[#8E8E8E] text-base font-medium">
+                {session.userData?.firstName} {session.userData?.lastName}
+              </span>
+              <span className="text-[#133664] text-sm font-normal">
+                View profile
+              </span>
             </div>
           </Link>
-
         </div>
 
         {/* <ul className="flex space-x-6">

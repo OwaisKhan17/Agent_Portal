@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
-import Dashboard from '../dashboard/page';
-import Notifications from '../notifications/page';
+import { notFound } from "next/navigation";
+import Dashboard from "../dashboard/page";
+import Notifications from "../notifications/page";
 
 const pages = {
   dashboard: Dashboard,
@@ -10,9 +10,9 @@ const pages = {
 
 export default function Page({ params }) {
   const PageComponent = pages[params.page];
-    console.log('PageComponent');
+  console.log("PageComponent");
   if (!PageComponent) {
-    notFound(); 
+    notFound();
   }
 
   return <PageComponent />;

@@ -2,11 +2,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "app/[lang]/api/auth/[...nextauth]/route";
 import MainLayout from "../layout/page";
 
-
 const SendMoney = async () => {
-  const session = await getServerSession( );
-  const columns = ['firstName', 'age'];
-  const apiUrl = '/api/users';
+  const session = await getServerSession();
+  const columns = ["firstName", "age"];
+  const apiUrl = "/api/users";
 
   if (!session) {
     return (
@@ -18,9 +17,7 @@ const SendMoney = async () => {
 
   return (
     <MainLayout>
-      <div className="container">
-
-      </div>
+      <div className="container"></div>
     </MainLayout>
   );
 };

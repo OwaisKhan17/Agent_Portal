@@ -3,7 +3,7 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { NextUIProvider } from "@nextui-org/react";
-// import {SessionProvider} from "next-auth/react"
+import ReduxWrapper from "lib/ReduxWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,13 +22,13 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <body className={`${poppins.className} antialiased`}>
-        {/* <SessionProvider session={session} basePath="/" refetchInterval={2 * 60} refetchOnWindowFocus={true}> */}
+        <ReduxWrapper>
           <NextUIProvider>
             <NextIntlClientProvider messages={messages}>
               {children}
             </NextIntlClientProvider>
           </NextUIProvider>
-        {/* </SessionProvider> */}
+        </ReduxWrapper>
       </body>
     </html>
   );

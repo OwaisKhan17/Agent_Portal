@@ -6,11 +6,11 @@ import TableComponent from "components/Table/Table";
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
   const columns = [
-    {name: "Name", uid: "firstName"},
-    {name: "Age", uid: "age"},
-    {name: "Role", uid: "role"},
-    {name: "Email", uid: "email"},
-    {name: "ACTIONS", uid: "actions"},
+    { name: "Name", uid: "firstName" },
+    { name: "Age", uid: "age" },
+    { name: "Role", uid: "role" },
+    { name: "Email", uid: "email" },
+    { name: "ACTIONS", uid: "actions" },
   ];
   const apiUrl = "/api/users";
 

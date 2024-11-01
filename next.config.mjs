@@ -11,15 +11,15 @@ const nextConfig = {
   //     };
   //     return config;
   //   },
-//   webpackDevMiddleware: (config) => {
-//     config.watchOptions = {
-//       poll: 600,
-//       aggregateTimeout: 300,
-//     };
-//     return config;
-//   },
+  //   webpackDevMiddleware: (config) => {
+  //     config.watchOptions = {
+  //       poll: 600,
+  //       aggregateTimeout: 300,
+  //     };
+  //     return config;
+  //   },
 
-webpack: (config, _) => ({
+  webpack: (config, _) => ({
     ...config,
     watchOptions: {
       ...config.watchOptions,
