@@ -15,7 +15,7 @@ export const authOptions = {
         pushId: { label: "PushId", type: "text" },
       },
       async authorize(credentials) {
-        console.log("Credentials received:", credentials);
+        console.log("Credentials", credentials);
 
         const response = await fetch(authenticateURL, {
           method: "POST",
