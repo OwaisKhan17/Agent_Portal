@@ -5,6 +5,7 @@ import Notifications from "../notifications/page";
 const pages = {
   dashboard: Dashboard,
   notifications: Notifications,
+  // Add more pages as needed
 };
 
 export default function Page({ params }) {

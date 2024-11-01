@@ -3,11 +3,16 @@ import { authOptions } from "app/[lang]/api/auth/[...nextauth]/route";
 import MainLayout from "../layout/page";
 import TableComponent from "components/Table/Table";
 
-
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
-  const columns = ['firstName', 'age'];
-  const apiUrl = '/api/users';
+  const columns = [
+    { name: "Name", uid: "firstName" },
+    { name: "Age", uid: "age" },
+    { name: "Role", uid: "role" },
+    { name: "Email", uid: "email" },
+    { name: "ACTIONS", uid: "actions" },
+  ];
+  const apiUrl = "/api/users";
 
   if (!session) {
     return (

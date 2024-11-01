@@ -13,7 +13,7 @@ export async function GET(request) {
 
   try {
     const response = await fetch(
-      `https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=firstName,age`
+      `https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=firstName,age,email,role`
     );
     const data = await response.json();
     console.log("data ", data.users);

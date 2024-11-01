@@ -37,9 +37,6 @@ export default function LoginComponent({ toggleForm }) {
     if (result.error) {
       setMessage("Invalid Credentials");
       return false;
-    } else {
-      // Redirect to the dashboard or home page
-      window.location.href = "/dashboard";
     }
   };
 
@@ -47,7 +44,7 @@ export default function LoginComponent({ toggleForm }) {
     <div className="flex justify-center h-screen items-center w-[calc(100%-400px)] relative z-10">
       <div className="p-12 bg-[#FFFEF9] mx-auto rounded-3xl w-[540px] shadow-[0px_4px_72px_9px_rgba(26,125,126,0.23)]">
         <div className="mb-7">
-          <h1 className="font-semibold text-2xl	text-[#00000085] text-center">
+          <h1 className="font-semibold text-2xl text-[#00000085] text-center">
             Welcome to Agency Portal
           </h1>
           <h2 className="font-bold text-4xl mt-8 mb-14 text-[#272746] text-center">
@@ -89,7 +86,6 @@ export default function LoginComponent({ toggleForm }) {
               fieldPlaceholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
-
             <button
               className="focus:outline-none flex items-center right-[20px] top-[50px] absolute text-sm leading-5"
               type="button"
@@ -104,9 +100,9 @@ export default function LoginComponent({ toggleForm }) {
             </button>
 
             <div className="flex justify-between items-center mt-1">
-              <Link href="#" className="text-sm font-normal text-[#1B9E97]">
+              {/* <Link href="#" className="text-sm font-normal text-[#1B9E97]">
                 Forgot Username
-              </Link>
+              </Link> */}
               <Link href="#" className="text-sm font-normal text-[#0F416A]">
                 Forgot Password
               </Link>
@@ -115,7 +111,7 @@ export default function LoginComponent({ toggleForm }) {
           <div>
             <button
               type="submit"
-              className="bg-[#159D97] text-white font-medium text-base w-full flex justify-center p-x py-4 rounded-lg 
+              className="bg-[#159D97] text-white font-medium text-base w-full flex justify-center p-x py-4 rounded-lg
                 font-semibold shadow-[0_4px_19px_0_rgba(119, 147, 65, 0.3)] cursor-pointer"
               onClick={handleSubmit}
             >
@@ -137,7 +133,6 @@ export default function LoginComponent({ toggleForm }) {
           </div>
         </div>
         <p className="text-red-500 mt-2">{message}</p>
-        {/* </form> */}
       </div>
 
       <CopyRight />

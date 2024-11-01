@@ -36,14 +36,12 @@ export async function middleware(req) {
   const matchedRoute = Object.keys(protectedRoutes).find((path) =>
     pathname.startsWith(path)
   );
-
   // Authentication and authorization checks
   if (matchedRoute) {
     // If the user is not authenticated, redirect to login
     if (!token) {
       return NextResponse.redirect(new URL("/", req.url));
     }
-
     // Check if the user's role is allowed
     const userRole = token?.userData?.role; // Adjust based on how you store user roles in the token
     console.log(
@@ -59,7 +57,6 @@ export async function middleware(req) {
     }
   }
   if (response) return response;
-
   console.log("Middleware hit:", req.url);
   return NextResponse.next();
 }

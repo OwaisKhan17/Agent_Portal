@@ -1,75 +1,6 @@
-// "use client";
-// import {
-//   Table,
-//   TableHeader,
-//   TableColumn,
-//   TableBody,
-//   TableRow,
-//   TableCell,
-//   Pagination,
-//   getKeyValue,
-// } from "@nextui-org/react";
-// import { useMemo, useState } from "react";
-
-// const TableComponent = ({ columns, data, rowsPerPage = 4 }) => {
-//   // };
-
-//   const [page, setPage] = useState(1);
-
-//   const pages = Math.ceil(data.length / rowsPerPage);
-
-//   const items = useMemo(() => {
-//     const start = (page - 1) * rowsPerPage;
-//     const end = start + rowsPerPage;
-
-//     return data.slice(start, end);
-//   }, [page, data]);
-
-//   return (
-//     <>
-//       <Table
-//         aria-label="Example table with client side pagination"
-//         bottomContent={
-//           <div className="flex w-full justify-center">
-//             <Pagination
-//               isCompact
-//               showControls
-//               showShadow
-//               color="secondary"
-//               page={page}
-//               total={pages}
-//               onChange={(page) => setPage(page)}
-//             />
-//           </div>
-//         }
-//         classNames={{
-//           wrapper: "min-h-[222px]",
-//         }}
-//       >
-//         <TableHeader columns={columns}>
-//           {(column) => (
-//             <TableColumn key={column.key}>{column.label}</TableColumn>
-//           )}
-//         </TableHeader>
-//         <TableBody items={items}>
-//           {(item) => (
-//             <TableRow key={item.name}>
-//               {(columnKey) => (
-//                 <TableCell>{getKeyValue(item, columnKey)}</TableCell>
-//               )}
-//             </TableRow>
-//           )}
-//         </TableBody>
-//       </Table>
-//     </>
-//   );
-// };
-
-// export default TableComponent;
-
 "use client";
 
-// import { Table, Pagination } from '@nextui-org/react';
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Table,
   TableHeader,
@@ -78,59 +9,163 @@ import {
   TableRow,
   TableCell,
   Pagination,
-  getKeyValue,
+  User,
+  Tooltip,
 } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import {
+  DeleteIcon,
+  EditIcon,
+  ExportIcon,
+  EyeIcon,
+  FilterIcon,
+} from "components/svgIcons/icons";
+
+const statusColorMap = {
+  active: "success",
+  paused: "danger",
+  vacation: "warning",
+};
 
 const TableComponent = ({ columns, rowsPerPage, apiUrl }) => {
   const [data, setData] = useState([]);
-  const [loading, loaderStatus] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+
   const fetchData = async (page) => {
-    loaderStatus(true);
+    setLoading(true);
     const response = await fetch(`${apiUrl}?page=${page}&limit=${rowsPerPage}`);
     const result = await response.json();
     setData(result.data);
     setTotalItems(result.total);
-    loaderStatus(false);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);
 
+  const renderCell = useCallback((item, columnKey) => {
+    const cellValue = item[columnKey];
+    console.log("cellValue ", cellValue);
+    switch (columnKey) {
+      case "firstName":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm capitalize">{cellValue}</p>
+            <p className="text-bold text-sm capitalize text-default-400">
+              {item.role}
+            </p>
+          </div>
+        );
+      case "email":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm capitalize">{cellValue}</p>
+            <p className="text-bold text-sm capitalize text-default-400">
+              {item.firstName}
+            </p>
+          </div>
+        );
+      case "age":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm capitalize">{cellValue}</p>
+            <p className="text-bold text-sm capitalize text-default-400">
+              {item.firstName}
+            </p>
+          </div>
+        );
+      case "actions":
+        return (
+          <div className="relative justify-center flex items-center gap-2">
+            <Tooltip content="Details">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <EyeIcon />
+              </span>
+            </Tooltip>
+            <Tooltip content="Edit user">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <EditIcon />
+              </span>
+            </Tooltip>
+            <Tooltip color="danger" content="Delete user">
+              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                <DeleteIcon />
+              </span>
+            </Tooltip>
+          </div>
+        );
+      default:
+        return cellValue;
+    }
+  }, []);
+
   const handlePageChange = (page) => {
-    console.log(" page ");
-    console.log(" page ", page);
     setCurrentPage(page);
   };
 
   return (
     <div>
+      {/* Custom styles */}
+      <style jsx>{`
+        .custom-pagination {
+          background-color: #000000;
+        }
+        .custom-pagination .item.active {
+          background-color: #19d2bcbf;
+        }
+      `}</style>
+
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
-          <Table>
-            <TableHeader>
-              {columns.map((column, index) => (
-                <TableColumn key={index}>{column}</TableColumn>
-              ))}
+          <div className="flex gap-x-5 justify-end mb-9 mt-8">
+            <button className="bg-white rounded-xl border-1 border-[#0258643B] shadow-lg shadow-[#8E8E8E45] w-36 py-3 justify-center items-center flex gap-x-4">
+              <FilterIcon />
+              <span className="text-[#3E3E3E] font-medium text-base">
+                Filters
+              </span>
+            </button>
+            <button className="bg-white rounded-xl border-1 border-[#0258643B] shadow-lg shadow-[#8E8E8E45] w-36 py-3 justify-center items-center flex gap-x-4">
+              <ExportIcon />
+              <span className="text-[#3E3E3E] font-medium text-base">
+                Export
+              </span>
+            </button>
+          </div>
+
+          <Table aria-label="Data table with actions">
+            <TableHeader columns={columns}>
+              {(column) => (
+                <TableColumn
+                  key={column.uid}
+                  align={column.uid === "actions" ? "center" : "start"}
+                >
+                  {column.name}
+                </TableColumn>
+              )}
             </TableHeader>
-            <TableBody>
-              {data.map((item) => (
+            <TableBody items={data}>
+              {(item) => (
                 <TableRow key={item.id}>
-                  {columns.map((column) => (
-                    <TableCell key={column}>{item[column]}</TableCell>
-                  ))}
+                  {(columnKey) => (
+                    <TableCell>{renderCell(item, columnKey)}</TableCell>
+                  )}
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
+
           <Pagination
-            total={totalItems} // Update based on your total item count from the server
-            initialPage={currentPage}
+            className="mt-4 flex justify-end custom-pagination"
+            // isCompact
+            showControls
+            // showShadow
+            // color="#19D2BCBF"
+            total={totalItems}
+            page={currentPage}
             onChange={handlePageChange}
             rowsPerPage={rowsPerPage}
           />

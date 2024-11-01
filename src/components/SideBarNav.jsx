@@ -10,12 +10,10 @@ import { DashboardIcon, LogoutIcon, TransactionIcon } from "./svgIcons/icons";
 export default function SideBarNav() {
   const pathName = usePathname();
   const basePath = pathName.split("/").slice(2).join("/");
-
-  const logout = () => {
-    console.log("Sign Out Triggered");
+  const logOut = () => {
+    console.log("signOut");
     signOut();
   };
-
   return (
     <div className="fixed left-0 top-0 bottom-0 py-7 h-screen w-[300px] bg-gradient-to-b from-[#19D2BC] via-[#24243E] to-[#0F0C29]">
       <Image
@@ -61,7 +59,7 @@ export default function SideBarNav() {
 
       <Link
         href="#"
-        onClick={logout}
+        onClick={logOut}
         className={`absolute bottom-0 flex items-center gap-x-1 w-full hover:bg-[#024553] px-7 py-5 `}
       >
         <LogoutIcon />
