@@ -23,7 +23,7 @@ export const authOptions = {
             "Content-Type": "application/json",
             "X-Business-Identifier": "KH",
             locale: "en",
-            Authorization: "Basic YWxpSUI6YWxpSUI=",
+            Authorization: "Basic" + env.process.BASIC_TOKEN,
           },
           body: JSON.stringify(credentials),
         });
