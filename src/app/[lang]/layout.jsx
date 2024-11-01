@@ -3,6 +3,7 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { NextUIProvider } from "@nextui-org/react";
+import ReduxWrapper from "lib/ReduxWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,15 +18,17 @@ export const metadata = {
 export default async function RootLayout({ children, params }) {
   const { lang } = params;
   const messages = await getMessages();
-  console.log("i am layout");
+  console.log("i am RootLayout");
   return (
     <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <body className={`${poppins.className} antialiased`}>
-        <NextUIProvider>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </NextUIProvider>
+        <ReduxWrapper>
+          <NextUIProvider>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+          </NextUIProvider>
+        </ReduxWrapper>
       </body>
     </html>
   );
