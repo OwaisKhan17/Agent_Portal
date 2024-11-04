@@ -48,12 +48,7 @@ export const authOptions = {
               uniqueIdentifier: data.data.uniqueIdentifier,
               portalID: data.data.portalId,
               refreshToken: data.data.refreshToken,
-              firstName: "Owais",
-              lastName: "Owais",
-              email: "Owais",
-              image: "Owais",
-              gender: "Owais",
-              role: "user",
+              role: "admin",
             },
           };
         } else {

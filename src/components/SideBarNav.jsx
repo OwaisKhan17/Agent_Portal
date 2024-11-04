@@ -5,7 +5,6 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import TPSLogo from "./../../public/images/tps-logo.png";
-import { DashboardIcon, LogoutIcon, TransactionIcon } from "./svgIcons/icons";
 import { useTranslations } from "next-intl";
 import {
   DashboardIcon,

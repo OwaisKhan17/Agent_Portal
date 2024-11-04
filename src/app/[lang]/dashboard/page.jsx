@@ -30,8 +30,8 @@ const Dashboard = async () => {
     <MainLayout>
       <div className="container">
         <h1>Dashboard</h1>
-        <p>
-          Welcome, {session.userData?.firstName} {session.userData?.lastName}!
+        {/* <p>
+          Welcome, {session.userData?.firstName} {session.userData?. }!
         </p>
         <p>Username: {session.userData?.username}</p>
         <p>Email: {session.userData?.email}</p>
@@ -39,7 +39,7 @@ const Dashboard = async () => {
         <img
           src={session.userData?.image}
           alt={`${session.userData?.firstName} ${session.userData?.lastName}`}
-        />
+        /> */}
       </div>
     </MainLayout>
   );

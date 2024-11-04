@@ -15,6 +15,8 @@ export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
   const [companyCode, setCompanyCode] = useState("");
   const [message, setMessage] = useState("");
 
+  const t = useTranslations();
+
   const [isVisible, setIsVisible] = useState(false);
   // const [isRecoverPassword, setIsRecoverPassword] = useState(false);
 

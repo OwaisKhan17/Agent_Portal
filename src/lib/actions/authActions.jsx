@@ -11,12 +11,6 @@ const loaderStatus = (isLoading) => ({
 });
 
 const GetUserInfo = async (accessToken, userID, uniqueIdentifier, portalID) => {
-  console.log("GetUserInfo:", accessToken, userID, uniqueIdentifier, portalID);
-  console.log(
-    "GetUserInfo URL: ",
-    `${usersURL}${portalID}/entities/${uniqueIdentifier}/user/${userID}`
-  );
-
   try {
     const headers = {
       Authorization: `Bearer ${accessToken}`,
@@ -53,12 +47,6 @@ const GetUserInfo = async (accessToken, userID, uniqueIdentifier, portalID) => {
 };
 
 const GetUserPermissions = async (accessToken, userID) => {
-  console.log("GetUserPermissions:", accessToken, userID);
-  console.log(
-    "GetUserPermissions URL: ",
-    `${permissionsURL}${userID}/permissions`
-  );
-
   try {
     const headers = {
       Authorization: `Bearer ${accessToken}`,
@@ -95,9 +83,6 @@ const GetUserPermissions = async (accessToken, userID) => {
 };
 
 const GetCustomerInquiry = async (accessToken, businessIdentifier) => {
-  console.log("GetCustomerInquiry:", accessToken, businessIdentifier);
-  console.log("GetCustomerInquiry URL: ", customerInquiryURL);
-
   try {
     const headers = {
       Authorization: `Bearer ${accessToken}`,
