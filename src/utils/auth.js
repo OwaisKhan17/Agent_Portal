@@ -1,3 +1,3 @@
 export const hasAccess = (userRole, allowedRoles) => {
-    return allowedRoles.includes(userRole);
+  return allowedRoles.includes(userRole);
 };

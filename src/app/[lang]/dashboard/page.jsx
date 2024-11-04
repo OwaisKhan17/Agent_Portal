@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "app/[lang]/api/auth/[...nextauth]/route";
 import MainLayout from "../layout/page";
+import { GetUserInfo } from "lib/actions/authActions";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
@@ -12,6 +13,16 @@ const Dashboard = async () => {
       </div>
     );
   }
+
+  // if (session) {
+  //   console.log("SESSION SESSION SESSION");
+  //   GetUserInfo(
+  //     session.accessToken,
+  //     session.userData.username,
+  //     session.userData.uniqueIdentifier,
+  //     session.userData.portalID
+  //   );
+  // }
 
   console.log("sessionsessionsessionsession", session);
 
