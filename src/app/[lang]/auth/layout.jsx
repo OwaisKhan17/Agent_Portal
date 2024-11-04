@@ -8,11 +8,24 @@ import { useTranslations } from "next-intl";
 import TPSLogo from "./../../../../public/images/tps-logo.png";
 import LoginCardVectors from "./../../../assets/images/login-card-vectors.png";
 import Loader from "components/loader/Loader";
+import RecoverPasswordComponent from "components/RecoverPassword";
+import OTPComponent from "components/OTPCode";
 
 export default function AuthLayout() {
   const [isLogin, SetIsLogin] = useState(true);
+  const [isRecoverPassword, SetIsRecoverPassword] = useState(true);
+  const [showOtpInput, setShowOtpInput] = useState(false);
   const toggleForm = () => {
     SetIsLogin((prev) => !prev);
+  };
+
+  const toggleRecoverPassword = () => {
+    console.log('toggleRecoverPassword')
+    SetIsRecoverPassword((prev) => !prev);
+  };
+
+  const showOtp = () => {
+    setShowOtpInput(true);
   };
   const t = useTranslations();
 
@@ -45,10 +58,17 @@ export default function AuthLayout() {
           </div>
         </div>
 
-        {isLogin ? (
-          <LoginComponent toggleForm={toggleForm} />
+        {isRecoverPassword ? (
+          <LoginComponent
+            toggleForm={toggleForm}
+            toggleRecoverPassword={toggleRecoverPassword}
+          />
+        ) : showOtpInput ? (
+          <OTPComponent  length={6}/>
         ) : (
-          <SignupComponent toggleForm={toggleForm} />
+          <RecoverPasswordComponent
+            toggleRecoverPassword={toggleRecoverPassword} showOtp={showOtp}
+          />
         )}
       </div>
       {authReducerData.isLoading ? <Loader /> : null}

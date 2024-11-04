@@ -8,16 +8,22 @@ import Loader from "./loader/Loader";
 import { useDispatch } from "react-redux";
 import { loaderStatus } from "lib/actions/authActions";
 
-export default function LoginComponent({ toggleForm }) {
+export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
+  // const [isRecoverPassword, setIsRecoverPassword] = useState(false);
 
   const dispatch = useDispatch();
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
+  const toggleVisibility = () => {
+    console.log('toggleVisibility')
+    setIsVisible(!isVisible);
+  }
+
+  // const toggleRecoverPassword = () => setIsRecoverPassword(!isRecoverPassword);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +43,9 @@ export default function LoginComponent({ toggleForm }) {
     if (result.error) {
       setMessage("Invalid Credentials");
       return false;
+    } else {
+      // Redirect to the dashboard or home page
+      window.location.href = "/dashboard";
     }
   };
 
@@ -99,13 +108,13 @@ export default function LoginComponent({ toggleForm }) {
               )}
             </button>
 
-            <div className="flex justify-between items-center mt-1">
+            <div className="flex justify-end items-center mt-2">
               {/* <Link href="#" className="text-sm font-normal text-[#1B9E97]">
                 Forgot Username
               </Link> */}
-              <Link href="#" className="text-sm font-normal text-[#0F416A]">
+              <button onClick={toggleRecoverPassword} className="cursor-pointer inline-block text-sm font-normal text-[#0F416A]">
                 Forgot Password
-              </Link>
+              </button>
             </div>
           </div>
           <div>
@@ -118,7 +127,7 @@ export default function LoginComponent({ toggleForm }) {
               Login
             </button>
           </div>
-          <div>
+          {/* <div>
             <p className="text-[#8D8D8D] text-center text-base font-normal mt-4">
               You dont have an Account?
               <Link
@@ -130,7 +139,7 @@ export default function LoginComponent({ toggleForm }) {
                 Sign up
               </Link>
             </p>
-          </div>
+          </div> */}
         </div>
         <p className="text-red-500 mt-2">{message}</p>
       </div>

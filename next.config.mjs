@@ -23,8 +23,8 @@ const nextConfig = {
     ...config,
     watchOptions: {
       ...config.watchOptions,
-      poll: 300,
-      aggregateTimeout: 100,
+      poll: 200,
+      aggregateTimeout: 50,
     },
   }),
 };

@@ -6,16 +6,18 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import TPSLogo from "./../../public/images/tps-logo.png";
 import { DashboardIcon, LogoutIcon, TransactionIcon } from "./svgIcons/icons";
+import { useTranslations } from "next-intl";
 
 export default function SideBarNav() {
   const pathName = usePathname();
   const basePath = pathName.split("/").slice(2).join("/");
+  const t = useTranslations();
   const logOut = () => {
     console.log("signOut");
     signOut();
   };
   return (
-    <div className="fixed left-0 top-0 bottom-0 py-7 h-screen w-[300px] bg-gradient-to-b from-[#19D2BC] via-[#24243E] to-[#0F0C29]">
+    <div className="fixed left-0 rtl:right-0 rtl:left-auto top-0 bottom-0 py-7 h-screen w-[300px] bg-gradient-to-b from-[#19D2BC] via-[#24243E] to-[#0F0C29]">
       <Image
         src={TPSLogo}
         alt={"TPS Logo"}
@@ -36,20 +38,20 @@ export default function SideBarNav() {
               >
                 <DashboardIcon />
                 <span className="ms-3 text-[#B3C7CB] text-base font-medium">
-                  Dashboard
+                {t("dashboard")}
                 </span>
               </Link>
             </li>
             <li>
               <Link
-                href="/transaction"
+                href="/notification"
                 className={`flex items-center gap-x-1 w-full hover:bg-[#024553] px-7 py-5 ${
-                  basePath === "transaction" ? "bg-[#024553]" : ""
+                  basePath === "notification" ? "bg-[#024553]" : ""
                 }`}
               >
                 <TransactionIcon />
                 <span className="ms-3 text-[#B3C7CB] text-base font-medium">
-                  Transaction
+                  {t("notification")}
                 </span>
               </Link>
             </li>
@@ -64,7 +66,7 @@ export default function SideBarNav() {
       >
         <LogoutIcon />
         <span className="ms-3 text-[#ffffff] text-base font-medium">
-          Logout
+        {t("logout")}
         </span>
       </Link>
     </div>

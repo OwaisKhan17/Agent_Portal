@@ -25,7 +25,7 @@ const Dashboard = async () => {
   return (
     <MainLayout>
       <div className="container">
-        <TableComponent columns={columns} rowsPerPage={5} apiUrl={apiUrl} />
+        <TableComponent columns={columns} showFilters={false} apiUrl={apiUrl} />
       </div>
     </MainLayout>
   );

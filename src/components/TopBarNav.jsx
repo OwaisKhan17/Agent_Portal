@@ -8,17 +8,24 @@ import Logout from "./Logout";
 import ProfileImage from "./../../public/images/profile-img.jpg";
 import { NotificationIcon, SearchIcon } from "./svgIcons/icons";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const TopBarNav = ({ session }) => {
   const pathName = usePathname();
   const pageName = pathName.split("/").pop() || "";
+  const t = useTranslations();
 
   return (
     <nav className="bg-white py-4">
       <div className="container flex justify-between items-center">
-        <h1 className="text-2xl font-bold capitalize">{pageName}</h1>
+        <h1 className="text-2xl font-bold capitalize">{t(pageName)}</h1>
 
         <div className="flex gap-x-6 items-center">
+
+          <div className="">
+            <LanguageSelector/>
+          </div>
+
           <button className="bg-white rounded-full w-11 h-11 shadow-lg shadow-[#8E8E8E45] text-center">
             <SearchIcon />
           </button>
@@ -43,7 +50,7 @@ const TopBarNav = ({ session }) => {
                 {session.userData?.firstName} {session.userData?.lastName}
               </span>
               <span className="text-[#133664] text-sm font-normal">
-                View profile
+              {t("view_profile")}
               </span>
             </div>
           </Link>

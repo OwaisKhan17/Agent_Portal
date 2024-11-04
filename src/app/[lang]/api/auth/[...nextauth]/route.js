@@ -15,7 +15,8 @@ export const authOptions = {
         pushId: { label: "PushId", type: "text" },
       },
       async authorize(credentials) {
-        console.log("Credentials received:", credentials);
+        console.log("BASIC_TOKEN ", process.env.BASIC_TOKEN);
+        console.log("credentials ", credentials);
 
         const response = await fetch(authenticateURL, {
           method: "POST",
@@ -23,14 +24,13 @@ export const authOptions = {
             "Content-Type": "application/json",
             "X-Business-Identifier": "KH",
             locale: "en",
-            Authorization: "Basic" + env.process.BASIC_TOKEN,
+            Authorization: "Basic" + process.env.BASIC_TOKEN,
           },
           body: JSON.stringify(credentials),
         });
 
         const data = await response.json();
         console.log("API Response:", data);
-        console.log("API Response:", response);
 
         if (response.ok && data.data.accessToken) {
           return {

@@ -16,7 +16,7 @@ const createProtectedRoutes = () => {
   const routes = {};
   locales.forEach((locale) => {
     routes[`/${locale}/dashboard`] = ["admin", "user"];
-    routes[`/${locale}/transaction`] = ["admin", "user"];
+    routes[`/${locale}/notification`] = ["admin", "user"];
   });
   return routes;
 };

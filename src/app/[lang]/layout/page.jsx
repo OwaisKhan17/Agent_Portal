@@ -7,7 +7,7 @@ export default async function MainLayout({ children }) {
   const session = await getServerSession(authOptions);
   console.log("I am Main Layout");
   return (
-    <div className="pl-[330px]">
+    <div className="rtl:pr-[330px] rtl:pl-0 pl-[330px]">
       <TopBarNav session={session} />
       <div className="flex flex-row">
         <SideBarNav />

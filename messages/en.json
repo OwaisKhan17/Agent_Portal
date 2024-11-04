@@ -1,4 +1,8 @@
 {
     "partnership_for_business_growth": "Partnership for Business Growth",
-    "login_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun."
+    "login_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun.",
+    "notification": "Notification",
+    "dashboard": "Dashboard",
+    "logout": "Logout",
+    "view_profile": "View Profile"
 }
