@@ -3,6 +3,8 @@ import * as actionTypes from "./../actionTypes";
 
 const initialState = {
   isLoading: false,
+  UserInfoData: null,
+  ResponseMessage: "",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -11,6 +13,20 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+
+    case actionTypes.GET_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        UserInfoData: action.payload,
+        ResponseMessage: action.message,
+      };
+
+    case actionTypes.GET_USER_INFO_FAIL:
+      return {
+        ...state,
+        UserInfoData: action.payload,
+        ResponseMessage: action.message,
       };
 
     default:

@@ -6,11 +6,13 @@ import CopyRight from "./copyRight/CopyRight";
 import { EyeSlashFilledIcon, EyeSlashUnfilledIcon } from "./svgIcons/icons";
 import Loader from "./loader/Loader";
 import { useDispatch } from "react-redux";
-import { loaderStatus } from "lib/actions/authActions";
+import { GetUserInfo, loaderStatus } from "lib/actions/authActions";
+import { useTranslations } from "next-intl";
 
 export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [companyCode, setCompanyCode] = useState("");
   const [message, setMessage] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
@@ -32,6 +34,7 @@ export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
     const result = await signIn("credentials", {
       accessIdentifier: username,
       accessKey: password,
+      companyCode: companyCode,
       accessKeyType: "password",
       portalId: "9",
       deviceId: "",
@@ -41,7 +44,7 @@ export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
     dispatch(loaderStatus(false));
     console.log("resultresultresultresult", result);
     if (result.error) {
-      setMessage("Invalid Credentials");
+      setMessage(result.error);
       return false;
     } else {
       // Redirect to the dashboard or home page
@@ -54,10 +57,10 @@ export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
       <div className="p-12 bg-[#FFFEF9] mx-auto rounded-3xl w-[540px] shadow-[0px_4px_72px_9px_rgba(26,125,126,0.23)]">
         <div className="mb-7">
           <h1 className="font-semibold text-2xl text-[#00000085] text-center">
-            Welcome to Agency Portal
+            {t("Welcome_to_agency_portal")}
           </h1>
           <h2 className="font-bold text-4xl mt-8 mb-14 text-[#272746] text-center">
-            Lets Get Started
+            {t("Lets_get_started")}
           </h2>
         </div>
         {/* <form onSubmit={handleSubmit}> */}
@@ -66,33 +69,33 @@ export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
           <div>
             <InputField
               labelClasses="text-base text-black font-normal"
-              labelText="Enter company code"
+              labelText={t("Enter_company_code")}
               fieldClasses="w-full text-sm mt-2 px-4 py-4 border border-[#8E8E8E] rounded-md bg-transparentt"
               fieldType="text"
-              fieldValue={username}
-              fieldPlaceholder="Company code"
-              onChange={(e) => setUsername(e.target.value)}
+              fieldValue={companyCode}
+              fieldPlaceholder={t("Enter_company_code")}
+              onChange={(e) => setCompanyCode(e.target.value)}
             />
           </div>
           <div>
             <InputField
               labelClasses="text-base text-black font-normal"
-              labelText="Enter your username or email address"
+              labelText={t("Enter_your_username_or_email_address")}
               fieldClasses="w-full text-sm mt-2 px-4 py-4 border border-[#8E8E8E] rounded-md bg-transparentt"
               fieldType="text"
               fieldValue={username}
-              fieldPlaceholder="Username or email address"
+              fieldPlaceholder={t("Enter_your_username_or_email_address")}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="relative mt-4">
             <InputField
               labelClasses="text-base text-black font-normal"
-              labelText="Enter your Password"
+              labelText={t("Enter_your_password")}
               fieldClasses="w-full text-sm mt-2 px-4 py-4 border border-[#8E8E8E] rounded-md bg-transparent"
               fieldType={isVisible ? "text" : "password"}
               fieldValue={password}
-              fieldPlaceholder="Password"
+              fieldPlaceholder={t("Enter_your_password")}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
@@ -113,7 +116,7 @@ export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
                 Forgot Username
               </Link> */}
               <button onClick={toggleRecoverPassword} className="cursor-pointer inline-block text-sm font-normal text-[#0F416A]">
-                Forgot Password
+              {t("Forgot_password")}
               </button>
             </div>
           </div>
@@ -124,19 +127,18 @@ export default function LoginComponent({ toggleForm, toggleRecoverPassword }) {
                 font-semibold shadow-[0_4px_19px_0_rgba(119, 147, 65, 0.3)] cursor-pointer"
               onClick={handleSubmit}
             >
-              Login
+              {t("Login")}
             </button>
           </div>
           {/* <div>
             <p className="text-[#8D8D8D] text-center text-base font-normal mt-4">
-              You dont have an Account?
+              {t("You_dont_have_an_account")}
               <Link
                 href="#"
                 onClick={toggleForm}
                 className="underline text-[#1B9993]"
               >
-                {" "}
-                Sign up
+                {t("Sign_up")}
               </Link>
             </p>
           </div> */}

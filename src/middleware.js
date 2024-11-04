@@ -5,13 +5,11 @@ import createMiddleware from "next-intl/middleware";
 
 const locales = ["en", "ar"];
 
-// Create the next-intl middleware
 export const i18nMiddleware = createMiddleware({
   locales,
   defaultLocale: "en",
 });
 
-// Function to generate protected routes
 const createProtectedRoutes = () => {
   const routes = {};
   locales.forEach((locale) => {
@@ -22,28 +20,22 @@ const createProtectedRoutes = () => {
 };
 
 export async function middleware(req) {
-  // Handle locale with next-intl middleware first
   const response = await i18nMiddleware(req);
 
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-  // Generate the protected routes
   const protectedRoutes = createProtectedRoutes();
 
   const { pathname } = req.nextUrl;
 
-  // Check if the requested path is protected
   const matchedRoute = Object.keys(protectedRoutes).find((path) =>
     pathname.startsWith(path)
   );
-  // Authentication and authorization checks
   if (matchedRoute) {
-    // If the user is not authenticated, redirect to login
     if (!token) {
       return NextResponse.redirect(new URL("/", req.url));
     }
-    // Check if the user's role is allowed
-    const userRole = token?.userData?.role; // Adjust based on how you store user roles in the token
+    const userRole = token?.userData?.role;
     console.log(
       "Middleware hit:",
       protectedRoutes,
@@ -52,7 +44,6 @@ export async function middleware(req) {
       req.url
     );
     if (!protectedRoutes[matchedRoute].includes(userRole)) {
-      // Redirect to 403 if access is denied
       return NextResponse.redirect(new URL("/unauthorize", req.url));
     }
   }
@@ -61,12 +52,6 @@ export async function middleware(req) {
   return NextResponse.next();
 }
 
-// Specify the paths that the middleware applies to
 export const config = {
-  matcher: [
-    "/(ar|en)/:path*", // Matches all routes under /ar and /en
-    "/dashboard",
-    // Apply locale handling to all other routes
-    "/((?!_next).*)",
-  ],
+  matcher: ["/(ar|en)/:path*", "/dashboard", "/((?!_next).*)"],
 };

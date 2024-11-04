@@ -4,5 +4,14 @@
     "notification": "Notification",
     "dashboard": "Dashboard",
     "logout": "Logout",
-    "view_profile": "View Profile"
+    "view_profile": "View Profile",
+    "Welcome_to_agency_portal": "Welcome to Agency Portal",
+    "Lets_get_started": "Lets Get Started",
+    "Enter_company_code": "Enter company code",
+    "Enter_your_username_or_email_address": "Enter your username or email address",
+    "Enter_your_password": "Enter your Password",
+    "Forgot_password": "Forgot Password",
+    "Login": "Login",
+    "You_dont_have_an_account": "You dont have an Account?",
+    "Sign_up": "Sign up"
 }

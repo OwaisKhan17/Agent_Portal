@@ -4,5 +4,14 @@
     "notification": "إشعار",
     "dashboard": "لوحة القيادة",
     "logout": "تسجيل الخروج",
-    "view_profile": "عرض الملف الشخصي"
+    "view_profile": "عرض الملف الشخصي",
+    "Welcome_to_agency_portal": "مرحبا بكم في بوابة الوكالة",
+    "Lets_get_started": "لنبدأ",
+    "Enter_company_code": "أدخل رمز الشركة",
+    "Enter_your_username_or_email_address": "أدخل اسم المستخدم أو عنوان البريد الإلكتروني الخاص بك",
+    "Enter_your_password": "أدخل كلمة المرور الخاصة بك",
+    "Forgot_password": "هل نسيت كلمة السر",
+    "Login": "تسجيل الدخول",
+    "You_dont_have_an_account": "ليس لديك حساب؟",
+    "Sign_up": "اشتراك"
 }

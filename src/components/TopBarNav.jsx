@@ -9,6 +9,7 @@ import ProfileImage from "./../../public/images/profile-img.jpg";
 import { NotificationIcon, SearchIcon } from "./svgIcons/icons";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import SessionTimeout from "./Timeout";
 
 const TopBarNav = ({ session }) => {
   const pathName = usePathname();
@@ -16,6 +17,7 @@ const TopBarNav = ({ session }) => {
   const t = useTranslations();
 
   return (
+    <>
     <nav className="bg-white py-4">
       <div className="container flex justify-between items-center">
         <h1 className="text-2xl font-bold capitalize">{t(pageName)}</h1>
@@ -30,9 +32,9 @@ const TopBarNav = ({ session }) => {
             <SearchIcon />
           </button>
 
-          <button className="bg-white rounded-full w-11 h-11 shadow-lg shadow-[#8E8E8E45] text-center">
-            <NotificationIcon />
-          </button>
+            <button className="bg-white rounded-full w-11 h-11 shadow-lg shadow-[#8E8E8E45] text-center">
+              <NotificationIcon />
+            </button>
 
           <Link
             href="#"
@@ -56,7 +58,7 @@ const TopBarNav = ({ session }) => {
           </Link>
         </div>
 
-        {/* <ul className="flex space-x-6">
+          {/* <ul className="flex space-x-6">
           {session && hasAccess(session.userData?.role, ["admin", "user"]) && (
             <li>
               <Link href="/dashboard" className="hover:text-blue-300">
@@ -92,8 +94,11 @@ const TopBarNav = ({ session }) => {
           <Logout />
           <LanguageSelector />
         </ul> */}
-      </div>
-    </nav>
+        </div>
+      </nav>
+
+      <SessionTimeout timeout={72} />
+    </>
   );
 };
 
